@@ -1,0 +1,21 @@
+# ================= 模型配置 =================
+llm:
+  model_name: "qwen-max"
+  base_url: "https://dashscope.aliyuncs.com/compatible-mode/v1"
+  temperature: 0.1
+
+# ================= 路径配置 =================
+paths:
+  data_dir: "data"                  # markdown 笔记文件夹
+  prompt_file: "prompt/standardize.md" # 提示词文件路径
+  log_file: "qwen_debug.log"
+
+# ================= 绘图配置 =================
+plot:
+  figure_size: [12, 8]
+  font_sans_serif: 
+    - "SimHei"
+    - "Arial Unicode MS"
+    - "Microsoft YaHei"
+    - "sans-serif"
+  axes_unicode_minus: false
