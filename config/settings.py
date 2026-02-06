@@ -1,3 +1,5 @@
+# 将ymal配置加载成python对象
+
 import os
 import logging
 import sys
@@ -15,10 +17,9 @@ if sys.platform == "win32":
         pass
 
 # 项目根目录
-ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) 
 
 # 1. 加载环境变量 (读取 .env)
-# 显式指定 .env 路径，防止在不同目录下运行找不到
 load_dotenv(os.path.join(ROOT_DIR, '.env'))
 
 # 2. 读取 YAML 配置
@@ -35,8 +36,6 @@ except Exception as e:
 # API 相关
 API_KEY = os.getenv("DASHSCOPE_API_KEY")
 if not API_KEY:
-    # 尝试从 yaml 中读取? 通常 API Key 不放 yaml。
-    # 这里保持原有逻辑，抛出异常或警告
     print("⚠️ 警告: 未找到 DASHSCOPE_API_KEY，请确保 .env 文件存在且已配置。")
 
 # 模型相关
@@ -44,6 +43,11 @@ LLM_SETTINGS = _yaml_conf.get('llm', {})
 MODEL_NAME = LLM_SETTINGS.get('model_name', 'qwen-max')
 BASE_URL = LLM_SETTINGS.get('base_url', '')
 TEMPERATURE = LLM_SETTINGS.get('temperature', 0.1)
+
+# Embedding 相关
+EMBEDDING_SETTINGS = _yaml_conf.get('embedding', {})
+EMBEDDING_MODEL = EMBEDDING_SETTINGS.get('model_name', 'text-embedding-v3')
+EMBEDDING_DIM = EMBEDDING_SETTINGS.get('dimensions', 1024)
 
 # 路径相关
 PATHS = _yaml_conf.get('paths', {})

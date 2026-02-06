@@ -4,6 +4,11 @@ llm:
   base_url: "https://dashscope.aliyuncs.com/compatible-mode/v1"
   temperature: 0.1
 
+# ================= Embedding 配置 =================
+embedding:
+  model_name: "text-embedding-v3"
+  dimensions: 1024  # text-embedding-v3 默认 1024
+
 # ================= 路径配置 =================
 paths:
   data_dir: "data"                  # markdown 笔记文件夹
